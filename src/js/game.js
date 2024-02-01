@@ -1,7 +1,7 @@
 import {Background} from "./background.js";
 import {Player} from "./player.js";
 import {InputHandler} from "./input.js";
-import {FlyingEnemy} from "./enemies.js";
+import {FlyingEnemy, StayingEnemy} from "./enemies.js";
 
 export class Game {
     constructor(width, height) {
@@ -32,10 +32,10 @@ export class Game {
 
     draw(context) {
         this.background.draw(context);
-        this.player.draw(context);
         this.enemies.forEach(enemy => {
             enemy.draw(context);
         });
+        this.player.draw(context);
     }
 
     handleEnemies(deltaTime) {
@@ -52,12 +52,9 @@ export class Game {
     }
 
     addEnemy() {
-        // if(this.speed > 0 && Math.random() < 0.5) {
-        //     this.enemies.push(new GroundEnemy(this));
-        // }
-        // else if(this.speed > 0) {
-        //     this.enemies.push(new ClimbingEnemy(this));
-        // }
+        if(this.speed > 0 && Math.random() < 0.5) {
+            this.enemies.push(new StayingEnemy(this));
+        }
         this.enemies.push(new FlyingEnemy(this));
     }
 }

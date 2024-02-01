@@ -1,9 +1,5 @@
 class Enemy {
     constructor() {
-        this.frameX = 8;
-        this.frameY = 1;
-        this.maxFrame = 5;
-
         this.fps = 20;
         this.frameInterval = 1000/this.fps;
         this.frameTimer = 0;
@@ -22,7 +18,7 @@ class Enemy {
                 ++this.frameX;
             }
             else {
-                this.frameX = 8;
+                this.frameX = this.DefFrameX;
             }
             this.frameTimer = 0;
         }
@@ -46,6 +42,11 @@ export class FlyingEnemy extends Enemy {
         super();
         this.game = game;
 
+        this.DefFrameX = 8;
+        this.frameX = 8;
+        this.frameY = 1;
+        this.maxFrame = 13;
+
         this.SpriteWidth = 128;
         this.SpriteHeight = 128;
 
@@ -58,8 +59,6 @@ export class FlyingEnemy extends Enemy {
         this.speedX = Math.random() + 1;
         this.speedY = 0;
 
-        this.maxFrame = 13;
-
         this.image = document.getElementById('enemy_firespirit');
 
         this.angle = 0;
@@ -70,5 +69,31 @@ export class FlyingEnemy extends Enemy {
         super.update(deltaTime);
         this.angle += this.va;
         this.y += Math.sin(this.angle);
+    }
+}
+
+export class StayingEnemy extends Enemy {
+    constructor(game) {
+        super();
+        this.game = game;
+
+        this.DefFrameX = 4;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.maxFrame = 4;
+
+        this.SpriteWidth = 128;
+        this.SpriteHeight = 128;
+
+        this.width = this.SpriteWidth * 3.5;
+        this.height = this.SpriteHeight * 3.5;
+
+        this.x = this.game.width;
+        this.y = this.game.height - this.height;
+
+        this.speedX = 0;
+        this.speedY = 0;
+
+        this.image = document.getElementById('enemy_plent');
     }
 }
