@@ -1,3 +1,5 @@
+import {Idle, Run, Jump, Attack} from "./playerStates.js";
+
 export class Player {
     constructor(game) {
         this.game = game;
@@ -26,9 +28,13 @@ export class Player {
         this.vy = 0;
         this.jumpPower = 30;
         this.weight = 1;
+
+        this.states = [new Idle(this.game), new Run(this.game), new Jump(this.game), new Attack(this.game)];
     }
 
     update(deltaTime, input) {
+        this.currentState.handleInput(input);
+
         this.horizontalMovement(input);
         this.horizontalBoundaries();
 
@@ -59,6 +65,12 @@ export class Player {
 
     onGround() {
         return this.y >= this.game.height - this.height;
+    }
+
+    setState(state, speed) {
+        this.currentState = this.states[state];
+        this.game.speed = this.game.maxSpeed * speed;
+        this.currentState.enter();
     }
 
     horizontalMovement(input) {

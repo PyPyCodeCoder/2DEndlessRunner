@@ -12,6 +12,9 @@ export class Game {
         this.background = new Background(this);
         this.player = new Player(this);
         this.input = new InputHandler(this);
+
+        this.player.currentState = this.player.states[0];
+        this.player.currentState.enter();
     }
 
     update(deltaTime) {

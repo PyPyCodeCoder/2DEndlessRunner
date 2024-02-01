@@ -40,7 +40,7 @@ export class Background {
         this.l3 = new Layer(this.game, this.width, this.height, 0.6, this.layer3);
         this.l4 = new Layer(this.game, this.width, this.height, 0.8, this.layer4);
         this.l5 = new Layer(this.game, this.width, this.height, 1, this.layer5);
-        this.backgroundLayers = [this.l1, this.l2, this.l3, this.l3, this.l4, this.l5];
+        this.backgroundLayers = [this.l1, this.l2, this.l3, this.l4, this.l5];
     }
 
     update() {
