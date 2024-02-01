@@ -30,10 +30,10 @@ export class Idle extends State {
             this.game.player.setState(states.RUN, 1);
         }
         else if(input.keys.includes('ArrowUp')) {
-            this.game.player.setState(states.JUMP, 1.2);
+            this.game.player.setState(states.JUMP, 0);
         }
         else if(input.keys.includes('Enter')) {
-            this.game.player.setState(states.ATTACK, 1.2);
+            this.game.player.setState(states.ATTACK, 0);
         }
     }
 }
@@ -51,10 +51,10 @@ export class Run extends State {
 
     handleInput(input) {
         if(input.keys.includes('ArrowUp')) {
-            this.game.player.setState(states.JUMP, 1.2);
+            this.game.player.setState(states.JUMP, 0);
         }
         else if(input.keys.includes('Enter')) {
-            this.game.player.setState(states.ATTACK, 1.2);
+            this.game.player.setState(states.ATTACK, 0);
         }
     }
 }
@@ -75,10 +75,10 @@ export class Jump extends State {
 
     handleInput(input) {
         if(input.keys.includes('Enter')) {
-            this.game.player.setState(states.ATTACK, 1.2);
+            this.game.player.setState(states.ATTACK, 0);
         }
         else if(this.game.player.onGround()) {
-            this.game.player.setState(states.IDLE, 1);
+            this.game.player.setState(states.IDLE, 0);
         }
     }
 }
@@ -96,11 +96,49 @@ export class Attack extends State {
 
     handleInput(input) {
         if(this.game.player.frameX >= this.game.player.maxFrame && this.game.player.onGround()) {
-            this.game.player.setState(states.RUN, 1);
+            this.game.player.setState(states.IDLE, 0);
 
         }
         else if(this.game.player.frameX >= this.game.player.maxFrame && !this.game.player.onGround()) {
-            this.game.player.setState(states.JUMP, 1.2);
+            this.game.player.setState(states.JUMP, 0);
         }
+    }
+}
+
+export class Hit extends State {
+    constructor(game) {
+        super('HIT', game);
+    }
+
+    enter() {
+        this.game.player.frameX = 0;
+        this.game.player.maxFrame = 2;
+        this.game.player.frameY = 8;
+    }
+
+    handleInput(input) {
+        if(this.game.player.frameX >= this.game.player.maxFrame && this.game.player.onGround()) {
+            this.game.player.setState(states.IDLE, 0);
+
+        }
+        else if(this.game.player.frameX >= this.game.player.maxFrame && !this.game.player.onGround()) {
+            this.game.player.setState(states.JUMP, 0);
+        }
+    }
+}
+
+export class Dead extends State {
+    constructor(game) {
+        super('DEAD', game);
+    }
+
+    enter() {
+        this.game.player.frameX = 0;
+        this.game.player.maxFrame = 2;
+        this.game.player.frameY = 9;
+    }
+
+    handleInput(input) {
+
     }
 }

@@ -1,4 +1,4 @@
-import {Idle, Run, Jump, Attack} from "./playerStates.js";
+import {Idle, Run, Jump, Attack, Hit, Dead} from "./playerStates.js";
 
 export class Player {
     constructor(game) {
@@ -29,7 +29,7 @@ export class Player {
         this.jumpPower = 30;
         this.weight = 1;
 
-        this.states = [new Idle(this.game), new Run(this.game), new Jump(this.game), new Attack(this.game)];
+        this.states = [new Idle(this.game), new Run(this.game), new Jump(this.game), new Attack(this.game), new Hit(this.game), new Dead(this.game)];
     }
 
     update(deltaTime, input) {
@@ -41,14 +41,14 @@ export class Player {
         this.verticalMovement();
         this.verticalBoundaries();
 
-        this.spiteAnimation(deltaTime);
+        this.spriteAnimation(deltaTime);
     }
 
     draw(context) {
         context.drawImage(this.image,    this.frameX * this.SpriteWidth, this.frameY * this.SpriteHeight, this.SpriteWidth, this.SpriteHeight,    this.x, this.y, this.width, this.height);
     }
 
-    spiteAnimation(deltaTime) {
+    spriteAnimation(deltaTime) {
         if(this.frameTimer > this.frameInterval) {
             if(this.frameX < this.maxFrame) {
                 ++this.frameX;

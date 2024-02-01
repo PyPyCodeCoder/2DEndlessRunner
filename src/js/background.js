@@ -11,7 +11,7 @@ class Layer {
     }
 
     update() {
-        if (this.x < -this.width) {
+        if (this.x <= -this.width + this.game.speed) {
             this.x = 0;
         }
         else {
