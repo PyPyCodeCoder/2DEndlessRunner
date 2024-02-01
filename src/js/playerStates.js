@@ -119,7 +119,6 @@ export class Hit extends State {
     handleInput(input) {
         if(this.game.player.frameX >= this.game.player.maxFrame && this.game.player.onGround()) {
             this.game.player.setState(states.IDLE, 0);
-
         }
         else if(this.game.player.frameX >= this.game.player.maxFrame && !this.game.player.onGround()) {
             this.game.player.setState(states.JUMP, 0);
