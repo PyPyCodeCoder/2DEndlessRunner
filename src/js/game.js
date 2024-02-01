@@ -1,5 +1,6 @@
 import {Background} from "./background.js";
 import {Player} from "./player.js";
+import {InputHandler} from "./input.js";
 
 export class Game {
     constructor(width, height) {
@@ -10,11 +11,12 @@ export class Game {
 
         this.background = new Background(this);
         this.player = new Player(this);
+        this.input = new InputHandler(this);
     }
 
     update(deltaTime) {
         this.background.update();
-        this.player.update(deltaTime);
+        this.player.update(deltaTime, this.input);
     }
 
     draw(context) {
