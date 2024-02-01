@@ -9,7 +9,7 @@ export class Player {
         this.SpriteHeight = 128;
 
         this.width = this.SpriteWidth * 3.5;
-        this.height = this.SpriteHeight * 3.5;
+        this.height = this.SpriteHeight * 3.5 ;
 
         this.x = 0;
         this.y = this.game.height - this.height;
@@ -78,10 +78,10 @@ export class Player {
     checkCollision() {
         this.game.enemies.forEach(enemy => {
             if(
-                enemy.x < this.x + this.width &&
-                enemy.x + enemy.width > this.x &&
-                enemy.y < this.y + this.height &&
-                enemy.y + enemy.height > this.y
+                (enemy.x + 90) < (this.x + 85) + (this.width - 170) &&
+                (enemy.x + 90) + (enemy.width - 180) > (this.x + 85) &&
+                (enemy.y + 180) < (this.y + 170) + (this.height - 170) &&
+                (enemy.y + 180) + (enemy.height - 180) > (this.y + 170)
             ) {
                 enemy.markedForDeletion = true;
                 if(this.currentState === this.states[3]) {
